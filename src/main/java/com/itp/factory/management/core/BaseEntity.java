@@ -42,7 +42,7 @@ public abstract class BaseEntity {
 		id = null;
 	}
 
-	public Long getId() {
+	public  Long getId() {
 		return id;
 	}
 
