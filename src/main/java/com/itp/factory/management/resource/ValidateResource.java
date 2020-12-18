@@ -16,29 +16,24 @@ public class ValidateResource {
 	@JsonProperty("username")
 	private String username;
 	
-	@JsonProperty("version")
-	private String version;
-	
-	@JsonProperty("code")
-	private String code;
 	
 	@JsonProperty("name")
 	private String name;
 	
-	@JsonProperty("status")
-	private String status;
-
+	@JsonProperty("contact")
+	private String contact;
+	
+	@JsonProperty("email")
+	private String email;
+	
+	
 	@JsonProperty("time")
 	private Timestamp time;
 	
-	@JsonProperty("branchName")
-	private String branchName;
+	
 	
 	/******************************/
 
-	public String getBranchName() {
-		return branchName;
-	}
 
 	public String getName() {
 		return name;
@@ -48,9 +43,6 @@ public class ValidateResource {
 		this.name = name;
 	}
 
-	public void setBranchName(String branchName) {
-		this.branchName = branchName;
-	}
 	
 	public Timestamp getTime() {
 		return time;
@@ -76,28 +68,21 @@ public class ValidateResource {
 		this.username = username;
 	}
 
-	public String getVersion() {
-		return version;
+	public String getContact() {
+		return contact;
 	}
 
-	public void setVersion(String version) {
-		this.version = version;
+	public void setContact(String contact) {
+		this.contact = contact;
 	}
 
-	public String getCode() {
-		return code;
+	public String getEmail() {
+		return email;
 	}
 
-	public void setCode(String code) {
-		this.code = code;
+	public void setEmail(String email) {
+		this.email = email;
 	}
-
-	public String getStatus() {
-		return status;
-	}
-
-	public void setStatus(String status) {
-		this.status = status;
-	}
+	
 	
 }

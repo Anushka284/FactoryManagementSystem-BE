@@ -2,6 +2,7 @@ package com.itp.factory.management.service.impl;
 
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.util.Calendar;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -12,13 +13,12 @@ import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.ResourceUtils;
 
+
 import com.itp.factory.management.base.MessagePropertyBase;
-import com.itp.factory.management.core.LogginAuthentcation;
 import com.itp.factory.management.domain.DeliveryInfo;
 import com.itp.factory.management.exception.ValidateRecordException;
 import com.itp.factory.management.repository.DeliveryInfoRepository;
 import com.itp.factory.management.resource.DeliveryInfoAddResource;
-import com.itp.factory.management.resource.DeliveryInfoUpdateResource;
 import com.itp.factory.management.service.DeliveryInfoService;
 
 import net.sf.jasperreports.engine.JRException;
@@ -67,32 +67,28 @@ public class DeliveryInfoServiceImpl extends MessagePropertyBase  implements Del
 
 	@Override
 	public DeliveryInfo addDelivery(DeliveryInfoAddResource deliveryInfoAddResource) {
-		
-		if (LogginAuthentcation.getInstance().getUserName()==null || LogginAuthentcation.getInstance().getUserName().isEmpty())
-			throw new ValidateRecordException(getEnvironment().getProperty(COMMON_NOT_NULL), "username");
-		
-        DeliveryInfo delivery = new DeliveryInfo();
+		Calendar calendar = Calendar.getInstance();
+        java.util.Date now = calendar.getTime();
+        java.sql.Timestamp currentTimestamp = new java.sql.Timestamp(now.getTime());
+      
+ 
+        																														
+        DeliveryInfo delivery = new DeliveryInfo();       
+        delivery.setName(deliveryInfoAddResource.getName());   
+        delivery.setVehicleNo(deliveryInfoAddResource.getVehicleNo());
+        delivery.setLoadingPlace(deliveryInfoAddResource.getLoadingPlace());
+        delivery.setDeliveryDate(currentTimestamp);
+        delivery.setMaterials(deliveryInfoAddResource.getMaterials());
+        delivery.setQty(deliveryInfoAddResource.getQty());
         delivery.setAmount(deliveryInfoAddResource.getAmount());
+        delivery.setRate(deliveryInfoAddResource.getRate());
+        delivery.setRemarks(deliveryInfoAddResource.getRemarks());
         delivery = deliveryInfoRepository.save(delivery);
     	return delivery;
 	}
-
-	@Override
-	public DeliveryInfo updateDelivery(DeliveryInfoUpdateResource deliveryInfoUpdateResource) {
-		
-		
-		if (LogginAuthentcation.getInstance().getUserName()==null || LogginAuthentcation.getInstance().getUserName().isEmpty())
-			throw new ValidateRecordException(getEnvironment().getProperty(COMMON_NOT_NULL), "username");
-		
-		Optional<DeliveryInfo> isDelivery = deliveryInfoRepository.findById(Long.parseLong(deliveryInfoUpdateResource.getQty()));
-		if (!isDelivery.isPresent()) 
-			throw new ValidateRecordException(getEnvironment().getProperty(RECORD_NOT_FOUND), "message");
 	
-		
-		DeliveryInfo deliveryInfo = isDelivery.get();
-		deliveryInfo = deliveryInfoRepository.saveAndFlush(deliveryInfo);
-    	return deliveryInfo;
-	}
+	
+
 
 	@Override
 	public void deleteDelivery(long id) {
@@ -124,11 +120,15 @@ public class DeliveryInfoServiceImpl extends MessagePropertyBase  implements Del
 		if(reportFormat.equalsIgnoreCase("html")) {
 			JasperExportManager.exportReportToHtmlFile(jasperPrint,path+"\\DeliveryReport.html");
 		}
-		if(reportFormat.equalsIgnoreCase("pdf")) {
-			JasperExportManager.exportReportToPdfFile(jasperPrint,path+"\\DeliveryReport.pdh");
+		if(reportFormat.equalsIgnoreCase("pdh")) {
+			JasperExportManager.exportReportToHtmlFile(jasperPrint,path+"\\DeliveryReport.pdh");
 		}
+		
 		
 		return "Report generated path:"+path;
 		
 	}
+
+
+	
 }

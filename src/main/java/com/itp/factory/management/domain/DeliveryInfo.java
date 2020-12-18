@@ -1,13 +1,15 @@
 package com.itp.factory.management.domain;
 
+import java.io.Serializable;
 import java.sql.Timestamp;
-
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
+
 
 import lombok.Data;
 /**
@@ -23,55 +25,45 @@ import lombok.Data;
 
 @Entity
 @Data
-@Table(name = "DeliveryInfo")
-public class DeliveryInfo {
+@Table(name = "deliveryinfo")
+public class DeliveryInfo implements Serializable {
 	
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name = "Serial_No")
-	private long id;
+	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "common_generator")
+	@SequenceGenerator(name = "common_generator", sequenceName = "common_seq", allocationSize = 1)
+	@Column(name = "id", updatable = false, nullable = false)
+	protected Long id;
 	
-	@Column(name = "Sp_Id")
-	private long sid;
-	
-	@Column(name = "Supplier_Name")
+	@Column(name = "name")
 	private String name;
 	
-	@Column(name = "Vehicle_No")
+	@Column(name = "vehicleNo")
 	private String vehicleNo;
 	
-	@Column(name = "Description")
-	private String description;
-	
-	@Column(name = "Loading_Place")
+	@Column(name = "loadingPlace")
 	private String loadingPlace;
 	
-	@Column(name = "Delivery_Date")
+	@Column(name = "deliveryDate")
 	private Timestamp deliveryDate;
 	
-	@Column(name = "Materials")
+	@Column(name = "materials")
 	private String materials;
 	
-	@Column(name = "Quantity")
-	private int qty;
+	@Column(name = "qty")
+	private String qty;
 	
-	@Column(name = "Unit_Price")
-	private double price;
+	@Column(name = "amount")
+	private String amount;
 	
-	@Column(name = "Amount")
-	private double amount;
+	@Column(name = "rate")
+	private String rate;
 	
-	@Column(name = "Rate")
-	private double rate;
-	
-	@Column(name = "Remarks")
+	@Column(name = "remarks")
 	private String remarks;
 	
 	
 
-	
-
-	public long getId() {
+	public Long getId() {
 		return id;
 	}
 
@@ -79,32 +71,14 @@ public class DeliveryInfo {
 		this.id = id;
 	}
 	
-	public double getAmount() {
-		amount = price * qty;
-		return amount;
-		
+
+	public String getName() {
+		return name;
 	}
 
-	public void setAmount(double amount) {
-		this.amount = amount;
+	public void setName(String name) {
+		this.name = name;
 	}
-
-	public double getRate() {
-		return rate;
-	}
-
-	public void setRate(double rate) {
-		this.rate = rate;
-	}
-
-	public long getSid() {
-		return sid;
-	}
-
-	public void setSid(long sid) {
-		this.sid = sid;
-	}
-	
 
 	public String getVehicleNo() {
 		return vehicleNo;
@@ -114,14 +88,6 @@ public class DeliveryInfo {
 		this.vehicleNo = vehicleNo;
 	}
 
-	public String getDescription() {
-		return description;
-	}
-
-	public void setDescription(String description) {
-		this.description = description;
-	}
-	
 	public String getLoadingPlace() {
 		return loadingPlace;
 	}
@@ -138,14 +104,6 @@ public class DeliveryInfo {
 		this.deliveryDate = deliveryDate;
 	}
 
-	public String getName() {
-		return name;
-	}
-
-	public void setName(String name) {
-		this.name = name;
-	}
-
 	public String getMaterials() {
 		return materials;
 	}
@@ -154,14 +112,31 @@ public class DeliveryInfo {
 		this.materials = materials;
 	}
 
-	public int getQty() {
+	public String getQty() {
 		return qty;
 	}
 
-	public void setQty(int qty) {
+	public void setQty(String qty) {
 		this.qty = qty;
 	}
 
+	public String getAmount() {
+		return amount;
+	}
+
+	public void setAmount(String amount) {
+		this.amount = amount;
+	}
+
+	public String getRate() {
+		return rate;
+	}
+
+	public void setRate(String rate) {
+		this.rate = rate;
+	}
+
+	
 
 	public String getRemarks() {
 		return remarks;
@@ -171,13 +146,14 @@ public class DeliveryInfo {
 		this.remarks = remarks;
 	}
 
-	public double getPrice() {
-		return price;
-	}
+	
+	
+	
+	
+	
+	
 
-	public void setPrice(double price) {
-		this.price = price;
-	}
+
 	
 	
 	

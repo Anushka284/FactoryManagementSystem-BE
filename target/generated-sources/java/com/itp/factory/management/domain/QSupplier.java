@@ -7,7 +7,6 @@ import com.querydsl.core.types.dsl.*;
 import com.querydsl.core.types.PathMetadata;
 import javax.annotation.Generated;
 import com.querydsl.core.types.Path;
-import com.querydsl.core.types.dsl.PathInits;
 
 
 /**
@@ -20,17 +19,23 @@ public class QSupplier extends EntityPathBase<Supplier> {
 
     public static final QSupplier supplier = new QSupplier("supplier");
 
+    public final com.itp.factory.management.core.QBaseEntity _super = new com.itp.factory.management.core.QBaseEntity(this);
+
     public final StringPath address = createString("address");
 
     public final StringPath contact = createString("contact");
 
     public final DateTimePath<java.sql.Timestamp> date = createDateTime("date", java.sql.Timestamp.class);
 
-    public final ListPath<DeliveryInfo, QDeliveryInfo> deliveryInfo = this.<DeliveryInfo, QDeliveryInfo>createList("deliveryInfo", DeliveryInfo.class, QDeliveryInfo.class, PathInits.DIRECT2);
+    public final StringPath email = createString("email");
 
-    public final NumberPath<Long> id = createNumber("id", Long.class);
+    //inherited
+    public final NumberPath<Long> id = _super.id;
 
     public final StringPath name = createString("name");
+
+    //inherited
+    public final NumberPath<Long> version = _super.version;
 
     public QSupplier(String variable) {
         super(Supplier.class, forVariable(variable));

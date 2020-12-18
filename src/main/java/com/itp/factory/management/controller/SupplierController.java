@@ -9,6 +9,7 @@ import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -37,8 +38,10 @@ import com.itp.factory.management.service.SupplierService;
  */
 
 @RestController
-@RequestMapping("/suppliers")
+@RequestMapping(value = "/supplier")
+@CrossOrigin(origins = "*")
 public class SupplierController extends MessagePropertyBase{
+	
 	@Autowired
 	private SupplierService supplierService;
 	
@@ -73,14 +76,31 @@ public class SupplierController extends MessagePropertyBase{
 		}
 	}
 	/**
-	 * get Supplier by name
-	 * @param @pathVariable {name}
+	 * get Supplier by contact
+	 * @param @pathVariable {contact}
 	 * @return List
 	 **/
-	@GetMapping(value = "/name/{name}")
-	public ResponseEntity<Object> getSupplierByName(@PathVariable(value = "name", required = true) String name){
+	@GetMapping(value = "/contact/{contact}")
+	public ResponseEntity<Object> getSupplierByContact(@PathVariable(value = "contact", required = true) String contact){
 		SuccessAndErrorDetailsResource responseMessage = new SuccessAndErrorDetailsResource();
-		Optional<Supplier> isPresentSupplier = supplierService.getByName(name);
+		Optional<Supplier> isPresentSupplier = supplierService.getByContact(contact);
+		if(isPresentSupplier.isPresent()) {
+			return new ResponseEntity<>(isPresentSupplier.get(), HttpStatus.OK);
+		}
+		else {
+			responseMessage.setMessages(getEnvironment().getProperty(RECORD_NOT_FOUND));
+			return new ResponseEntity<>(responseMessage, HttpStatus.NO_CONTENT);
+		}
+	}
+	/**
+	 * get Supplier by email
+	 * @param @pathVariable {email}
+	 * @return List
+	 **/
+	@GetMapping(value = "/email/{email}")
+	public ResponseEntity<Object> getSupplierByEmail(@PathVariable(value = "email", required = true) String email){
+		SuccessAndErrorDetailsResource responseMessage = new SuccessAndErrorDetailsResource();
+		Optional<Supplier> isPresentSupplier = supplierService.getByEmail(email);
 		if(isPresentSupplier.isPresent()) {
 			return new ResponseEntity<>(isPresentSupplier.get(), HttpStatus.OK);
 		}
@@ -106,15 +126,15 @@ public class SupplierController extends MessagePropertyBase{
      * @param @RequestBody{SupplierUpdateResource}
      * @return SuccessAndErrorDetailsDto
      */
-	@PutMapping(value = "/update/{id}")
+	@PutMapping(value = "update/{id}")
 	public ResponseEntity<Object> updateSupplier(@PathVariable(value = "id", required = true) Long id, 
-		@Valid @RequestBody SupplierUpdateResource supplierUpdateResource){
+												                 @Valid @RequestBody SupplierUpdateResource supplierUpdateResource){
 		SuccessAndErrorDetailsResource successAndErrorDetailsResource=new SuccessAndErrorDetailsResource();
 		Optional<Supplier>isPresentSupplier = supplierService.getById(id);		
 		if(isPresentSupplier.isPresent()) {
 			supplierUpdateResource.setId(id.toString());
-			Supplier Supplier = supplierService.updateSupplier(supplierUpdateResource);
-			successAndErrorDetailsResource = new SuccessAndErrorDetailsResource(getEnvironment().getProperty(RECORD_UPDATED), Long.toString(Supplier.getId()));
+			Supplier supplier = supplierService.updateSupplier(supplierUpdateResource);
+			successAndErrorDetailsResource = new SuccessAndErrorDetailsResource(getEnvironment().getProperty(RECORD_UPDATED), supplier.getId().toString());
 			return new ResponseEntity<>(successAndErrorDetailsResource,HttpStatus.OK);
 		}
 		else {

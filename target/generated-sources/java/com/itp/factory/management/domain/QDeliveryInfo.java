@@ -19,11 +19,9 @@ public class QDeliveryInfo extends EntityPathBase<DeliveryInfo> {
 
     public static final QDeliveryInfo deliveryInfo = new QDeliveryInfo("deliveryInfo");
 
-    public final NumberPath<Double> amount = createNumber("amount", Double.class);
+    public final StringPath amount = createString("amount");
 
     public final DateTimePath<java.sql.Timestamp> deliveryDate = createDateTime("deliveryDate", java.sql.Timestamp.class);
-
-    public final StringPath description = createString("description");
 
     public final NumberPath<Long> id = createNumber("id", Long.class);
 
@@ -33,15 +31,11 @@ public class QDeliveryInfo extends EntityPathBase<DeliveryInfo> {
 
     public final StringPath name = createString("name");
 
-    public final NumberPath<Double> price = createNumber("price", Double.class);
+    public final StringPath qty = createString("qty");
 
-    public final NumberPath<Integer> qty = createNumber("qty", Integer.class);
-
-    public final NumberPath<Double> rate = createNumber("rate", Double.class);
+    public final StringPath rate = createString("rate");
 
     public final StringPath remarks = createString("remarks");
-
-    public final NumberPath<Long> sid = createNumber("sid", Long.class);
 
     public final StringPath vehicleNo = createString("vehicleNo");
 

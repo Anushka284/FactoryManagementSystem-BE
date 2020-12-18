@@ -3,6 +3,8 @@ package com.itp.factory.management.service;
 import java.util.List;
 import java.util.Optional;
 
+import org.springframework.stereotype.Service;
+
 import com.itp.factory.management.domain.Supplier;
 import com.itp.factory.management.resource.SupplierAddResource;
 import com.itp.factory.management.resource.SupplierUpdateResource;
@@ -17,7 +19,7 @@ import com.itp.factory.management.resource.SupplierUpdateResource;
  *    
  ********************************************************************************************************
  */
-
+@Service
 public interface SupplierService {
 	
 	/**
@@ -39,12 +41,21 @@ public interface SupplierService {
 	public Optional<Supplier> getById(Long id);
 	/**
 	 * 
-	 * Find Supplier get by name
+	 * Find Supplier get by contact
 	 * @author Anushaka
-	 ** @return -JSON array of Category
+	 ** @return -JSON array of Supplier
 	 * 
 	 * */
-	public Optional <Supplier> getByName(String name);
+	public Optional <Supplier> getByContact(String contact);
+	
+	/**
+	 * 
+	 * Find Supplier get by email
+	 * @author Anushaka
+	 ** @return -JSON array of Supplier
+	 * 
+	 * */
+	public Optional<Supplier> getByEmail(String email);
 	
 	/**
 	 * 
@@ -75,5 +86,9 @@ public interface SupplierService {
 	 * 
 	 * */
 	public void deleteSupplier(long id);
+
+	
+
+	
 	
 }

@@ -4,9 +4,10 @@ import java.io.FileNotFoundException;
 import java.util.List;
 import java.util.Optional;
 
+import org.springframework.stereotype.Service;
+
 import com.itp.factory.management.domain.DeliveryInfo;
 import com.itp.factory.management.resource.DeliveryInfoAddResource;
-import com.itp.factory.management.resource.DeliveryInfoUpdateResource;
 
 import net.sf.jasperreports.engine.JRException;
 /**
@@ -19,6 +20,7 @@ import net.sf.jasperreports.engine.JRException;
  *    
  ********************************************************************************************************
  */
+@Service
 public interface DeliveryInfoService {
 
 	/**
@@ -41,10 +43,9 @@ public interface DeliveryInfoService {
 	public Optional<DeliveryInfo> getById(Long id);
 	
 
-	
 	/**
 	 * 
-	 * Insert Delivery Information
+	 * Add Delivery Information
 	 * @author Anushka
 	 * @param  - DeliveryInfoAddResource
 	 * @return - Successfully saved
@@ -52,16 +53,8 @@ public interface DeliveryInfoService {
 	 * */
 	public DeliveryInfo addDelivery(DeliveryInfoAddResource deliveryInfoAddResource );
 	
+	
 
-	/**
-	 * 
-	 * Update Delivery Information
-	 * @author Anushka
-	 * @param  - DeliveryInfoAddResource
-	 * @return - Successfully saved
-	 * 
-	 * */
-	public DeliveryInfo updateDelivery(DeliveryInfoUpdateResource deliveryInfoUpdateResource );
 	
 	/**
 	 * 
@@ -85,6 +78,10 @@ public interface DeliveryInfoService {
 	
 	
 	public String exportReport(String reportFormat) throws FileNotFoundException, JRException;
+
+
+
+	
 	
 	
 }

@@ -24,13 +24,9 @@ import com.itp.factory.management.domain.Supplier;
 @Repository
 public interface DeliveryInfoRepository extends JpaRepository<DeliveryInfo ,Long>{
 	
+	Optional <DeliveryInfo> findByName(String name);
 	
-	
-	List <Supplier> findById(String id);
-	
-	
-	
-	List<DeliveryInfo>findAll();
+	Optional <DeliveryInfo> findByNameAndId(String name, Long id);
 	
 	Optional <DeliveryInfo> findById(Long id);
 

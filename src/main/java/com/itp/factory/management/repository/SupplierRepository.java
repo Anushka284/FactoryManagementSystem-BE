@@ -8,7 +8,6 @@ import org.springframework.stereotype.Repository;
 
 
 import com.itp.factory.management.domain.Supplier;
-import com.itp.factory.management.enums.CommonStatus;
 
 /**
  * Supplier Repository
@@ -22,11 +21,18 @@ import com.itp.factory.management.enums.CommonStatus;
  */
 
 @Repository
-public interface SupplierReppository extends JpaRepository<Supplier ,Long> {
+public interface SupplierRepository extends JpaRepository<Supplier ,Long> {
 		
-	Optional <Supplier> findByName(String name);
+
+	Optional<Supplier> findByName(String name);
 	
-	List <Supplier> findById(String id);
-	
+	Optional<Supplier> findById(Long id);
+
 	Optional <Supplier> findByNameAndId(String name, Long id);
+
+	Optional<Supplier> findByContact(String contact);
+	
+	Optional<Supplier> findByEmail(String email);
+	
+
 }

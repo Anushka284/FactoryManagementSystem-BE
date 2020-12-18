@@ -1,7 +1,13 @@
 package com.itp.factory.management.base;
 
+import java.util.Optional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.env.Environment;
+
+import com.itp.factory.management.domain.DeliveryInfo;
+import com.itp.factory.management.domain.Supplier;
+import com.itp.factory.management.resource.DeliveryInfoAddResource;
 
 public abstract class MessagePropertyBase {
 	
@@ -38,6 +44,10 @@ public abstract class MessagePropertyBase {
 	protected static final String PAGEABLE_LENGTH = "common.pageable-length";
 	protected static final String NO_RECORD_TO_SAVED = "common.no-record";
 	protected static final String INVALID_VERSION = "common-invalid.version";
+
+	
+
+
 	
 	/** JSON Properties */
 	

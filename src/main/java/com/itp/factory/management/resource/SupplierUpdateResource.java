@@ -20,17 +20,35 @@ import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 public class SupplierUpdateResource {
 	
 	private String id;
+	
 	@NotBlank(message = "{common.not-null}")
 	@Size(max = 70, message = "{common-name.size}")
 	private String name;
 	
-	@Size(max = 255, message = "{description.size}") 
-	private String description;
-	
+	@NotBlank(message = "{common.not-null}")
+	@Size(max = 120, message = "{common-address.size}")
+	private String address;
 	
 	@NotBlank(message = "{common.not-null}")
-	@Pattern(regexp = "^$|[0-10]+", message = "{common-numeric.pattern}")
+	@Pattern(regexp = "^$|[0-9]+", message = "{common-numeric.pattern}")
 	private String contact;
+	
+	@NotBlank(message = "{common.not-null}")
+	@Size(max = 90, message = "{common-email.size}")
+	private String email;
+	
+	@NotBlank(message = "{common.not-null}")
+	@Pattern(regexp = "^$|[0-9]+", message = "{common-numeric.pattern}")
+	private String version;
+
+	public String getVersion() {
+		return version;
+	}
+
+
+	public void setVersion(String version) {
+		this.version = version;
+	}
 
 
 	public String getId() {
@@ -43,6 +61,16 @@ public class SupplierUpdateResource {
 	}
 
 
+	public String getEmail() {
+		return email;
+	}
+
+
+	public void setEmail(String email) {
+		this.email = email;
+	}
+
+
 	public String getName() {
 		return name;
 	}
@@ -52,14 +80,13 @@ public class SupplierUpdateResource {
 		this.name = name;
 	}
 
-
-	public String getDescription() {
-		return description;
+	public String getAddress() {
+		return address;
 	}
 
 
-	public void setDescription(String description) {
-		this.description = description;
+	public void setAddress(String address) {
+		this.address = address;
 	}
 
 

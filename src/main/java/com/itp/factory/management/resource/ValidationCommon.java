@@ -35,7 +35,7 @@ public class ValidationCommon{
  
     @JsonProperty("name")
     private String name;
- 
+   
     @JsonProperty("description")
     private String description;
  
@@ -775,11 +775,13 @@ public class ValidationCommon{
 		this.otherEligibilityCode = otherEligibilityCode;
 	}
 	
+	
 	/////////////////////////////
 
 	public String getOverdraftFeesChargesId() {
         return overdraftFeesChargesId;
     }
+	
  
     public String getProductType() {
         return productType;
